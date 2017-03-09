@@ -25,6 +25,7 @@
         zoom: 9
     });
    var markers = []; 
+    var infoWindow = new AMap.InfoWindow({offset: new AMap.Pixel(0, -30)});
         for (var i = 0; i <sites.length; i += 1) {
     			var marker;
                         var icon = new AMap.Icon({
@@ -32,7 +33,7 @@
     					size: new AMap.Size(24, 24)
     				});
     			marker = new AMap.Marker({
-    					icon: icon,
+    				
     					position:sites[i].pos.split(','),
     					offset: new AMap.Pixel(-12,-12),
     					zIndex: 101,
@@ -40,9 +41,16 @@
     					map: map
     				});
     			
-    			
+    		        marker.content = sites[i].name
+                        marker.on('click', markerClick);
+                        marker.emit('click', {target: marker});
+   
     			markers.push(marker);
-    		}
+     		}
+                  function markerClick(e) {
+                     infoWindow.setContent(e.target.content);
+                     infoWindow.open(map, e.target.getPosition());
+             }
 			  map.setFitView();
     </script>
     <script type="text/javascript" src="http://webapi.amap.com/demos/js/liteToolbar.js"></script>
