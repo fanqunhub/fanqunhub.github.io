@@ -29,11 +29,11 @@
         for (var i = 0; i <sites.length; i += 1) {
     			var marker;
                         var icon = new AMap.Icon({
-    					image: 'http://vdata.amap.com/icons/b18/1/2.png',
+    					image: './icbc.jpg',
     					size: new AMap.Size(24, 24)
     				});
     			marker = new AMap.Marker({
-    				
+    				        icon:icon,
     					position:sites[i].pos.split(','),
     					offset: new AMap.Pixel(-12,-12),
     					zIndex: 101,
